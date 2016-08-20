@@ -7,7 +7,9 @@ int main(){
 	RUN_TEST(test_nfe_clear_flash);
 	RUN_TEST(test_nfe_write_1);
 	RUN_TEST(test_nfe_write_2);
-	RUN_TEST(test_nfe_erase_block);
+	RUN_TEST(test_nfe_write_3);
+	RUN_TEST(test_nfe_erase_block_1);
+	RUN_TEST(test_nfe_erase_block_2);
 	RUN_TEST(test_nfe_read);
 	return UNITY_END();
 }

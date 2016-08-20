@@ -28,8 +28,10 @@ void nfe_destroy_flash(NFE_FLASH * flash){
 	free(flash);
 }
 
-void nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NFE_UINT32 size){
-	if(destination + size > flash->memory_size) return;
+NFE_ERROR nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NFE_UINT32 size){
+	if(destination + size > flash->memory_size) {
+		return NFE_ERROR_DESTINATION_OUT_OF_BOUND;
+	}
 	NFE_INT32 i;
 	NFE_UINT32 current;
 	for(i = 0; i < size; i++){
@@ -44,7 +46,9 @@ void nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE_UINT
 	memcpy(destination, flash->memory + source, size);
 }
 
-void nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
-	if(block_number > flash->num_of_blocks && block_number < 0) return; //TODO return error
+NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
+	if(block_number >= flash->num_of_blocks || block_number < 0) {
+		return NFE_ERROR_INVALID_BLOCK_NUMBER;
+	} 	
 	memset(flash->memory + (block_number * flash->block_size), 0xFF, flash->block_size);
 }
