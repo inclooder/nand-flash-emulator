@@ -39,8 +39,12 @@ void nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NFE_UIN
 		flash->memory[current] = old_val & new_val;
 	}
 }
+
 void nfe_read(NFE_FLASH * flash, NFE_UINT32 source, void * destination, NFE_UINT32 size){
 	memcpy(destination, flash->memory + source, size);
 }
+
 void nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
+	if(block_number > flash->num_of_blocks && block_number < 0) return; //TODO return error
+	memset(flash->memory + (block_number * flash->block_size), 0xFF, flash->block_size);
 }

@@ -3,6 +3,7 @@
 
 #include "unity.h"
 #include "nfe.h"
+#include <stdlib.h>
 
 void test_nfe_create_flash(void){
 	NFE_FLASH * flash = nfe_create_flash(256, 1024);
@@ -44,6 +45,18 @@ void test_nfe_write_2(void){
 
 void test_nfe_erase_block(void){
 	NFE_FLASH * flash = nfe_create_flash(13, 201);
+	NFE_UINT8 buff[2] = { 0xAB, 0xCD };
+	nfe_write(flash, 333, &buff, 2); //Second block
+	TEST_ASSERT_EQUAL_MEMORY(&buff, flash->memory + 333, 2);
+	nfe_erase_block(flash, 1); //Erase second block (count from 0)
+
+	NFE_UINT8 * expected = malloc(201);
+	NFE_UINT32 i;
+	for(i = 0; i < 201; i++){
+		expected[i] = 0xFF;
+	}
+
+	TEST_ASSERT_EQUAL_MEMORY(expected, flash->memory + 333, 201);
 	nfe_destroy_flash(flash);
 }
 
