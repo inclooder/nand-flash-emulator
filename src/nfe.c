@@ -40,7 +40,7 @@ void nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NFE_UIN
 	}
 }
 
-void nfe_read(NFE_FLASH * flash, NFE_UINT32 source, void * destination, NFE_UINT32 size){
+void nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE_UINT32 size){
 	memcpy(destination, flash->memory + source, size);
 }
 
