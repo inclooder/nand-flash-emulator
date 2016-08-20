@@ -23,4 +23,23 @@ void test_nfe_clear_flash(void){
 	nfe_destroy_flash(flash);
 }
 
+void test_nfe_write_1(void){
+	NFE_FLASH * flash = nfe_create_flash(256, 100);
+	char buff[2] = { 0x00, 0x00 };
+	nfe_write(flash, 10, &buff, 2);
+	TEST_ASSERT_EQUAL_MEMORY(&buff, flash->memory + 10, 2);
+	nfe_destroy_flash(flash);
+}
+
+void test_nfe_write_2(void){
+	NFE_FLASH * flash = nfe_create_flash(256, 99);
+	char buff1[2] = { 0xFF, 0x00 };
+	nfe_write(flash, 20, &buff1, 2);
+	char buff2[2] = { 0x00, 0xFF };
+	nfe_write(flash, 20, &buff2, 2);
+	char expected[2] = { 0x00, 0x00 };
+	TEST_ASSERT_EQUAL_MEMORY(&expected, flash->memory + 20, 2);
+	nfe_destroy_flash(flash);
+}
+
 #endif /* end of include guard: TEST_NFE_H */

@@ -29,6 +29,15 @@ void nfe_destroy_flash(NFE_FLASH * flash){
 }
 
 void nfe_write(NFE_FLASH * flash, unsigned int destination, void * source, unsigned int size){
+	if(destination + size > flash->memory_size) return;
+	int i;
+	unsigned int current;
+	for(i = 0; i < size; i++){
+		current = destination + i;
+		unsigned char old_val = flash->memory[current];
+		unsigned char new_val = ((unsigned char *)source)[i];
+		flash->memory[current] = old_val & new_val;
+	}
 }
 void nfe_read(NFE_FLASH * flash, unsigned int source, void * destination, unsigned int size){
 	memcpy(destination, flash->memory + source, size);

@@ -22,6 +22,7 @@ end
 
 guard :shell do
   watch /(src\/.*)|(test\/.*)/ do
+    `rm -r build`
     `mkdir -p build`
     `cd build && cmake ..`
     `cd build && make`
