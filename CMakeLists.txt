@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-project(snfd)
+project(nand-flash-emulator)
 enable_language(C)
 
 # location of additional cmake modules
@@ -14,7 +14,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
     )
 
-add_library(snfd src/snfd.c)
+add_library(nfe src/nfe.c)
 
 
 # target to update git submodules
@@ -64,7 +64,7 @@ add_dependencies(unit_tests unity)
 target_link_libraries(
     unit_tests
     unity
-    snfd
+    nfe
     )
 
 

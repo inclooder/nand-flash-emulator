@@ -1,8 +1,8 @@
 # install libs
-install(TARGETS snfd DESTINATION snfd/lib)
+install(TARGETS nfe DESTINATION nfe/lib)
 
 # install headers
-install(FILES ${PROJECT_SOURCE_DIR}/src/snfd.h DESTINATION snfd/include)
+install(FILES ${PROJECT_SOURCE_DIR}/src/nfe.h DESTINATION nfe/include)
 
 # cpack
 include(InstallRequiredSystemLibraries)
