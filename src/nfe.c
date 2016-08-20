@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-NFE_FLASH * nfe_create_flash(unsigned short num_of_blocks, unsigned short block_size){
-	unsigned int memory_size = num_of_blocks * block_size;
+NFE_FLASH * nfe_create_flash(NFE_UINT16 num_of_blocks, NFE_UINT16 block_size){
+	NFE_UINT32 memory_size = num_of_blocks * block_size;
 
 	NFE_FLASH * flash = malloc(sizeof(NFE_FLASH));
 	flash->memory_size = memory_size;
@@ -16,8 +16,8 @@ NFE_FLASH * nfe_create_flash(unsigned short num_of_blocks, unsigned short block_
 	return flash;
 }
 
-void nfe_clear_flash(NFE_FLASH * flash, unsigned char clear_byte){
-	int i;
+void nfe_clear_flash(NFE_FLASH * flash, NFE_UINT8 clear_byte){
+	NFE_INT32 i;
 	for(i = 0; i < flash->memory_size; i++){
 		flash->memory[i] = clear_byte;
 	}
@@ -28,19 +28,19 @@ void nfe_destroy_flash(NFE_FLASH * flash){
 	free(flash);
 }
 
-void nfe_write(NFE_FLASH * flash, unsigned int destination, void * source, unsigned int size){
+void nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NFE_UINT32 size){
 	if(destination + size > flash->memory_size) return;
-	int i;
-	unsigned int current;
+	NFE_INT32 i;
+	NFE_UINT32 current;
 	for(i = 0; i < size; i++){
 		current = destination + i;
-		unsigned char old_val = flash->memory[current];
-		unsigned char new_val = ((unsigned char *)source)[i];
+		NFE_UINT8 old_val = flash->memory[current];
+		NFE_UINT8 new_val = ((NFE_UINT8 *)source)[i];
 		flash->memory[current] = old_val & new_val;
 	}
 }
-void nfe_read(NFE_FLASH * flash, unsigned int source, void * destination, unsigned int size){
+void nfe_read(NFE_FLASH * flash, NFE_UINT32 source, void * destination, NFE_UINT32 size){
 	memcpy(destination, flash->memory + source, size);
 }
-void nfe_erase_block(NFE_FLASH * flash, unsigned short block_number){
+void nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
 }

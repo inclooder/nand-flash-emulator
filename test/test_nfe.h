@@ -16,7 +16,7 @@ void test_nfe_create_flash(void){
 void test_nfe_clear_flash(void){
 	NFE_FLASH * flash = nfe_create_flash(256, 100);
 	nfe_clear_flash(flash, 0x11);
-	int i;
+	NFE_INT32 i;
 	for(i = 0; i < flash->memory_size; i++){
 		TEST_ASSERT_EQUAL(0x11, flash->memory[i]);
 	}
@@ -25,7 +25,7 @@ void test_nfe_clear_flash(void){
 
 void test_nfe_write_1(void){
 	NFE_FLASH * flash = nfe_create_flash(256, 100);
-	char buff[2] = { 0x00, 0x00 };
+	NFE_UINT8 buff[2] = { 0x00, 0x00 };
 	nfe_write(flash, 10, &buff, 2);
 	TEST_ASSERT_EQUAL_MEMORY(&buff, flash->memory + 10, 2);
 	nfe_destroy_flash(flash);
@@ -33,12 +33,17 @@ void test_nfe_write_1(void){
 
 void test_nfe_write_2(void){
 	NFE_FLASH * flash = nfe_create_flash(256, 99);
-	char buff1[2] = { 0xFF, 0x00 };
+	NFE_UINT8 buff1[2] = { 0xFF, 0x00 };
 	nfe_write(flash, 20, &buff1, 2);
-	char buff2[2] = { 0x00, 0xFF };
+	NFE_UINT8 buff2[2] = { 0x00, 0xFF };
 	nfe_write(flash, 20, &buff2, 2);
-	char expected[2] = { 0x00, 0x00 };
+	NFE_UINT8 expected[2] = { 0x00, 0x00 };
 	TEST_ASSERT_EQUAL_MEMORY(&expected, flash->memory + 20, 2);
+	nfe_destroy_flash(flash);
+}
+
+void test_nfe_erase_block(void){
+	NFE_FLASH * flash = nfe_create_flash(13, 201);
 	nfe_destroy_flash(flash);
 }
 
