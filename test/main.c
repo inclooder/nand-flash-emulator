@@ -3,6 +3,7 @@
 
 int main(){
 	UNITY_BEGIN();
-	/* RUN_TEST(); */
+	RUN_TEST(test_nfe_create_flash);
+	RUN_TEST(test_nfe_clear_flash);
 	return UNITY_END();
 }

@@ -1,4 +1,6 @@
 #include "nfe.h"
+#include <string.h>
+#include <stdlib.h>
 
 NFE_FLASH * nfe_create_flash(unsigned short num_of_blocks, unsigned short block_size){
 	unsigned int memory_size = num_of_blocks * block_size;
@@ -15,7 +17,8 @@ NFE_FLASH * nfe_create_flash(unsigned short num_of_blocks, unsigned short block_
 }
 
 void nfe_clear_flash(NFE_FLASH * flash, unsigned char clear_byte){
-	for(int i = 0; i < flash->memory_size; i++){
+	int i;
+	for(i = 0; i < flash->memory_size; i++){
 		flash->memory[i] = clear_byte;
 	}
 }
@@ -23,4 +26,12 @@ void nfe_clear_flash(NFE_FLASH * flash, unsigned char clear_byte){
 void nfe_destroy_flash(NFE_FLASH * flash){
 	free(flash->memory);
 	free(flash);
+}
+
+void nfe_write(NFE_FLASH * flash, unsigned int destination, void * source, unsigned int size){
+}
+void nfe_read(NFE_FLASH * flash, unsigned int source, void * destination, unsigned int size){
+	memcpy(destination, flash->memory + source, size);
+}
+void nfe_erase_block(NFE_FLASH * flash, unsigned short block_number){
 }
