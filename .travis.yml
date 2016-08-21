@@ -7,4 +7,5 @@ compiler:
 script:
     - mkdir build
     - cd build
-    - cmake .. && make test
+    - cmake .. && make
+    - ./unit_tests
