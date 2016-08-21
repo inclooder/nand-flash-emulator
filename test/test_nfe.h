@@ -99,7 +99,7 @@ void test_nfe_read_2(void){
 	nfe_destroy_flash(flash);
 }
 
-void test_nfe_clear_counters(void){
+void test_nfe_test_clear_counters(void){
 	NFE_FLASH * flash = nfe_create_flash(10, 100);
 	flash->counters.reads = 1;
 	flash->counters.writes = 1;
@@ -110,6 +110,15 @@ void test_nfe_clear_counters(void){
 	TEST_ASSERT_EQUAL(0, flash->counters.writes);
 	TEST_ASSERT_EQUAL(0, flash->counters.block_erases);
 
+	nfe_destroy_flash(flash);
+}
+
+void test_nfe_test_get_write_count(void){
+	NFE_FLASH * flash = nfe_create_flash(10, 100);
+	NFE_UINT8 buff[50] = { 0x00 };
+	NFE_ERROR error = nfe_write(flash, 90, &buff, 50);
+	NFE_UINT32 write_count = nfe_test_get_write_count(flash);
+	TEST_ASSERT_EQUAL(1, write_count);
 	nfe_destroy_flash(flash);
 }
 
