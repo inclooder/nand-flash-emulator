@@ -27,7 +27,6 @@
 #define NFE_UINT8 unsigned char
 #endif
 
-
 // Errors
 
 #define NFE_ERROR NFE_UINT16
