@@ -47,7 +47,7 @@ void test_nfe_write_3(void){
 	NFE_FLASH * flash = nfe_create_flash(10, 10);
 	NFE_UINT8 buff[50] = { 0x00 };
 	NFE_ERROR error = nfe_write(flash, 90, &buff, 50);
-	TEST_ASSERT_EQUAL(NFE_ERROR_DESTINATION_OUT_OF_BOUND, error);
+	TEST_ASSERT_EQUAL(NFE_ERROR_OUT_OF_BOUND, error);
 	nfe_destroy_flash(flash);
 }
 
@@ -75,7 +75,7 @@ void test_nfe_erase_block_2(void){
 	nfe_destroy_flash(flash);
 }
 
-void test_nfe_read(void){
+void test_nfe_read_1(void){
 	NFE_FLASH * flash = nfe_create_flash(20, 150);
 	NFE_UINT8 buff[10] = {
 		0x01, 0x02, 0x03, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x11, 0x55
@@ -85,6 +85,14 @@ void test_nfe_read(void){
 	nfe_read(flash, &read_buff, 1000, 10);
 	TEST_ASSERT_EQUAL_MEMORY(read_buff, buff, 10);
 
+	nfe_destroy_flash(flash);
+}
+
+void test_nfe_read_2(void){
+	NFE_FLASH * flash = nfe_create_flash(10, 100);
+	NFE_UINT8 read_buff[10];
+	NFE_ERROR error = nfe_read(flash, &read_buff, 999, 1);
+	TEST_ASSERT_EQUAL(NFE_ERROR_OUT_OF_BOUND, error);
 	nfe_destroy_flash(flash);
 }
 

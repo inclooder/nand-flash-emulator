@@ -10,6 +10,7 @@ int main(){
 	RUN_TEST(test_nfe_write_3);
 	RUN_TEST(test_nfe_erase_block_1);
 	RUN_TEST(test_nfe_erase_block_2);
-	RUN_TEST(test_nfe_read);
+	RUN_TEST(test_nfe_read_1);
+	RUN_TEST(test_nfe_read_2);
 	return UNITY_END();
 }

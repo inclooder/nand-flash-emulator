@@ -34,7 +34,7 @@
 #define NFE_ERROR_NO_ERROR 0
 #define NFE_ERROR_INVALID_PARAM 1
 #define NFE_ERROR_INVALID_BLOCK_NUMBER 2
-#define NFE_ERROR_DESTINATION_OUT_OF_BOUND 3
+#define NFE_ERROR_OUT_OF_BOUND 3
 
 
 #endif /* end of include guard: NFE_TYPES_H */

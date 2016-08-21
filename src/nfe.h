@@ -15,7 +15,7 @@ NFE_FLASH * nfe_create_flash(NFE_UINT16 num_of_blocks, NFE_UINT16 block_size);
 void nfe_destroy_flash(NFE_FLASH * flash);
 void nfe_clear_flash(NFE_FLASH * flash, NFE_UINT8 clear_byte);
 NFE_ERROR nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NFE_UINT32 size);
-void nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE_UINT32 size);
+NFE_ERROR nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE_UINT32 size);
 NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number);
 
 #endif /* end of include guard: NFE_H */
