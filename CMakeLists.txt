@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(nand-flash-emulator)
 enable_language(C)
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0") # debug, no optimisation
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage") # enabling coverage
+
 # location of additional cmake modules
 set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
