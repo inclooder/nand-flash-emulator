@@ -36,5 +36,13 @@
 #define NFE_ERROR_INVALID_BLOCK_NUMBER 2
 #define NFE_ERROR_OUT_OF_BOUND 3
 
+// Data structures
+
+typedef struct {
+	NFE_UINT8 * memory;
+	NFE_UINT32 num_of_blocks;
+	NFE_UINT32 block_size;
+	NFE_UINT32 memory_size;
+} NFE_FLASH;
 
 #endif /* end of include guard: NFE_TYPES_H */
