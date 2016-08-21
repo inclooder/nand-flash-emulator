@@ -10,6 +10,9 @@ void test_nfe_create_flash(void){
 	TEST_ASSERT_EQUAL(256, flash->num_of_blocks);
 	TEST_ASSERT_EQUAL(1024, flash->block_size);
 	TEST_ASSERT_EQUAL(262144, flash->memory_size);
+	TEST_ASSERT_EQUAL(0, flash->counters.reads);
+	TEST_ASSERT_EQUAL(0, flash->counters.writes);
+	TEST_ASSERT_EQUAL(0, flash->counters.block_erases);
 
 	nfe_destroy_flash(flash);
 }
@@ -93,6 +96,20 @@ void test_nfe_read_2(void){
 	NFE_UINT8 read_buff[10];
 	NFE_ERROR error = nfe_read(flash, &read_buff, 999, 1);
 	TEST_ASSERT_EQUAL(NFE_ERROR_OUT_OF_BOUND, error);
+	nfe_destroy_flash(flash);
+}
+
+void test_nfe_clear_counters(void){
+	NFE_FLASH * flash = nfe_create_flash(10, 100);
+	flash->counters.reads = 1;
+	flash->counters.writes = 1;
+	flash->counters.block_erases = 1;
+	nfe_test_clear_counters(flash);
+
+	TEST_ASSERT_EQUAL(0, flash->counters.reads);
+	TEST_ASSERT_EQUAL(0, flash->counters.writes);
+	TEST_ASSERT_EQUAL(0, flash->counters.block_erases);
+
 	nfe_destroy_flash(flash);
 }
 

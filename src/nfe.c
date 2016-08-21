@@ -12,6 +12,7 @@ NFE_FLASH * nfe_create_flash(NFE_UINT16 num_of_blocks, NFE_UINT16 block_size){
 	flash->memory = malloc(memory_size);
 	
 	nfe_clear_flash(flash, 0xFF);
+	nfe_test_clear_counters(flash);
 
 	return flash;
 }
@@ -55,3 +56,10 @@ NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
 	} 	
 	memset(flash->memory + (block_number * flash->block_size), 0xFF, flash->block_size);
 }
+
+void nfe_test_clear_counters(NFE_FLASH * flash){
+	flash->counters.reads = 0;
+	flash->counters.writes = 0;
+	flash->counters.block_erases = 0;
+}
+

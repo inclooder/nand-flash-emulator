@@ -12,5 +12,6 @@ int main(){
 	RUN_TEST(test_nfe_erase_block_2);
 	RUN_TEST(test_nfe_read_1);
 	RUN_TEST(test_nfe_read_2);
+	RUN_TEST(test_nfe_clear_counters);
 	return UNITY_END();
 }

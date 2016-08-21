@@ -39,10 +39,17 @@
 // Data structures
 
 typedef struct {
+	NFE_UINT32 reads;
+	NFE_UINT32 writes;
+	NFE_UINT32 block_erases;
+} NFE_FLASH_TEST_COUNTERS;
+
+typedef struct {
 	NFE_UINT8 * memory;
 	NFE_UINT32 num_of_blocks;
 	NFE_UINT32 block_size;
 	NFE_UINT32 memory_size;
+	NFE_FLASH_TEST_COUNTERS counters;
 } NFE_FLASH;
 
 #endif /* end of include guard: NFE_TYPES_H */
