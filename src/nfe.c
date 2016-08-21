@@ -58,12 +58,3 @@ NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
 	memset(flash->memory + (block_number * flash->block_size), 0xFF, flash->block_size);
 }
 
-void nfe_test_clear_counters(NFE_FLASH * flash){
-	flash->counters.reads = 0;
-	flash->counters.writes = 0;
-	flash->counters.block_erases = 0;
-}
-
-NFE_UINT32 nfe_test_get_write_count(NFE_FLASH * flash){
-	return flash->counters.writes;
-}
