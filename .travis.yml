@@ -9,6 +9,7 @@ script:
     - cd build
     - cmake .. && make
     - ./unit_tests
+    - gcov -o . src/nfe.c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
