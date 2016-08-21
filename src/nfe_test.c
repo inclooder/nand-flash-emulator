@@ -9,3 +9,7 @@ void nfe_test_clear_counters(NFE_FLASH * flash){
 NFE_UINT32 nfe_test_get_write_count(NFE_FLASH * flash){
 	return flash->counters.writes;
 }
+
+NFE_UINT32 nfe_test_get_erase_block_count(NFE_FLASH * flash){
+	return flash->counters.block_erases;
+}

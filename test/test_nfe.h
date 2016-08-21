@@ -122,5 +122,15 @@ void test_nfe_test_get_write_count(void){
 	nfe_destroy_flash(flash);
 }
 
+void test_nfe_test_get_erase_block_count(void){
+	NFE_FLASH * flash = nfe_create_flash(10, 100);
+	nfe_erase_block(flash, 0);
+	nfe_erase_block(flash, 1);
+	nfe_erase_block(flash, 1);
+	NFE_UINT32 erase_count = nfe_test_get_erase_block_count(flash);
+	TEST_ASSERT_EQUAL(3, erase_count);
+	nfe_destroy_flash(flash);
+}
+
 
 #endif /* end of include guard: TEST_NFE_H */

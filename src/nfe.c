@@ -56,5 +56,6 @@ NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
 		return NFE_ERROR_INVALID_BLOCK_NUMBER;
 	} 	
 	memset(flash->memory + (block_number * flash->block_size), 0xFF, flash->block_size);
+	flash->counters.block_erases++;
 }
 
