@@ -14,7 +14,11 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
     )
 
-add_library(nfe src/nfe.c src/nfe_test.c)
+file(GLOB NFE_SOURCES
+    "src/*.c"
+    )
+
+add_library(nfe ${NFE_SOURCES})
 
 
 # target to update git submodules
