@@ -3,6 +3,8 @@ install(TARGETS nfe DESTINATION nfe/lib)
 
 # install headers
 install(FILES ${PROJECT_SOURCE_DIR}/src/nfe.h DESTINATION nfe/include)
+install(FILES ${PROJECT_SOURCE_DIR}/src/nfe_types.h DESTINATION nfe/include)
+
 
 # cpack
 include(InstallRequiredSystemLibraries)
