@@ -42,6 +42,7 @@ NFE_ERROR nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NF
 		flash->memory[current] = old_val & new_val;
 	}
 	flash->counters.writes++;
+	return NFE_ERROR_NO_ERROR;
 }
 
 NFE_ERROR nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE_UINT32 size){
@@ -49,6 +50,7 @@ NFE_ERROR nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE
 		return NFE_ERROR_OUT_OF_BOUND;
 	}
 	memcpy(destination, flash->memory + source, size);
+	return NFE_ERROR_NO_ERROR;
 }
 
 NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
@@ -57,5 +59,6 @@ NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
 	} 	
 	memset(flash->memory + (block_number * flash->block_size), 0xFF, flash->block_size);
 	flash->counters.block_erases++;
+	return NFE_ERROR_NO_ERROR;
 }
 
