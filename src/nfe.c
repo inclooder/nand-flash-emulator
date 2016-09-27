@@ -46,7 +46,7 @@ NFE_ERROR nfe_write(NFE_FLASH * flash, NFE_UINT32 destination, void * source, NF
 }
 
 NFE_ERROR nfe_read(NFE_FLASH * flash, void * destination, NFE_UINT32 source, NFE_UINT32 size){
-	if(source + size >= flash->memory_size) {
+	if(source + size > flash->memory_size) {
 		return NFE_ERROR_OUT_OF_BOUND;
 	}
 	memcpy(destination, flash->memory + source, size);

@@ -94,7 +94,7 @@ void test_nfe_read_1(void){
 void test_nfe_read_2(void){
 	NFE_FLASH * flash = nfe_create_flash(10, 100);
 	NFE_UINT8 read_buff[10];
-	NFE_ERROR error = nfe_read(flash, &read_buff, 999, 1);
+	NFE_ERROR error = nfe_read(flash, &read_buff, 1000, 1);
 	TEST_ASSERT_EQUAL(NFE_ERROR_OUT_OF_BOUND, error);
 	nfe_destroy_flash(flash);
 }
