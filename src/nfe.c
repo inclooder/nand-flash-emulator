@@ -1,6 +1,7 @@
 #include "nfe.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 NFE_FLASH * nfe_create_flash(NFE_UINT16 num_of_blocks, NFE_UINT16 block_size){
 	NFE_UINT32 memory_size = num_of_blocks * block_size;
@@ -62,3 +63,10 @@ NFE_ERROR nfe_erase_block(NFE_FLASH * flash, NFE_UINT16 block_number){
 	return NFE_ERROR_NO_ERROR;
 }
 
+
+NFE_ERROR nfe_dump_to_file(NFE_FLASH * flash, const char * file_path)
+{
+	FILE * out_file = fopen(file_path, "w");
+	fwrite(flash->memory, flash->memory_size, 1, out_file);
+	fclose(out_file);
+}
